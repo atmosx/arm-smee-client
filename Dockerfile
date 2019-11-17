@@ -1,4 +1,4 @@
-FROM arm64v8/node
+FROM arm64v8/node:13.1.0-alpine
 
 MAINTAINER "atmosx"
 LABEL name="smee-client"
@@ -11,7 +11,7 @@ LABEL website="https://smee.io"
 ENV VERSION 1.1.0
 
 WORKDIR /smee
-RUN npm install -g smee-client@$VERSION
+RUN npm install smee-client@$VERSION
 COPY smee-client.js /smee/smee-client.js
 USER nobody
-ENTRYPOINT [ "npm", "start" ]
+ENTRYPOINT [ "node", "/smee/smee-client.js" ]
